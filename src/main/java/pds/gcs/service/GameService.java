@@ -1,5 +1,9 @@
 package pds.gcs.service;
 
-public interface GameService {
+import java.util.List;
 
+import pds.gcs.entity.Game;
+
+public interface GameService {
+	List<Game> getAllGames();
 }
