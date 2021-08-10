@@ -54,6 +54,9 @@
 					<td>
 						<a th:href="@{/games/edit/{id}(id=${game.id})}" 
 						class="btn btn-primary"> Update </a>
+						
+						<a th:href="@{/games/{id}(id=${game.id})}" 
+						class="btn btn-danger"> Delete </a>
 					</td>
 				</tr>
 			</tbody>
