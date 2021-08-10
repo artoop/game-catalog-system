@@ -21,15 +21,6 @@ public class GameCatalogSystemApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Game game1 = new Game("Control", "Remedy", "31/07/2019");
-		gameRepository.save(game1);
-		
-		Game game2 = new Game("Max Payne 2", "Remedy", "31/07/2003");
-		gameRepository.save(game2);
-		
-		Game game3 = new Game("Final Fantasy X", "Square", "31/07/2001");
-		gameRepository.save(game3);
-		
 		
 	}
 

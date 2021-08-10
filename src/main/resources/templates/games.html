@@ -9,10 +9,32 @@
 	crossorigin="anonymous">
 </head>
 <body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+	  <!-- Brand -->
+	  <a class="navbar-brand" href="#">Game Catalog</a>
 	
+	  <!-- Toggler/collapsibe Button -->
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	
+	  <!-- Navbar links -->
+	  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+	    <ul class="navbar-nav">
+	      <li class="nav-item">
+	        <a class="nav-link" th:href="@{/games}">Game List</a>
+	      </li>
+	    </ul>
+	  </div>
+	</nav>
 	<div class="container">
 		<div class="row">
-			<h1> List Games </h1>
+			<h1> Games List </h1>
+		</div>	
+		<div class="row">
+			<div class="col-lg-3">
+				<a th:href="@{/games/new}" class="btn btn-primary btn-sm mb-3" >Add Game</a>
+			</div>
 		</div>
 		<table class="table table-striped table-bordered">
 			<thead class="table-dark">
@@ -29,6 +51,10 @@
 					<td th:text="${game.title}"></td>
 					<td th:text="${game.publisher}"></td>
 					<td th:text="${game.launchDate}"></td>
+					<td>
+						<a th:href="@{/games/edit/{id}(id=${game.id})}" 
+						class="btn btn-primary"> Update </a>
+					</td>
 				</tr>
 			</tbody>
 		</table>
