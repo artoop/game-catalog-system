@@ -8,16 +8,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import pds.gcs.entity.Game;
+import pds.gcs.service.CommentService;
 import pds.gcs.service.GameService;
 
 @Controller
 public class GameController {
 	
 	private GameService gameService;
-
-	public GameController(GameService gameService) {
+	private CommentService commentService;
+	
+	public GameController(GameService gameService, CommentService commentService) {
 		super();
 		this.gameService = gameService;
+		this.commentService = commentService;
 	}
 	
 	//handler method for the games list and return mode and view
@@ -40,6 +43,15 @@ public class GameController {
 	public String saveGame(@ModelAttribute("game") Game game) {
 			gameService.saveGame(game);
 			return "redirect:/games";
+	}
+	
+	//show game page handler
+	@GetMapping("/games/{id}")
+	public String showGameInfo(@PathVariable Long id, Model model) {
+		model.addAttribute("game", gameService.getGameById(id));
+		model.addAttribute("comments", commentService.findByResourceId(id));		
+		
+		return "view_game";
 	}
 	
 	//update game handler
@@ -68,7 +80,7 @@ public class GameController {
 	}
 	
 	//delete game handler
-	@GetMapping("/games/{id}")
+	@GetMapping("/games/delete/{id}")
 	public String deleteGame(@PathVariable Long id) {
 		gameService.deleteGameById(id);
 		return "redirect:/games";

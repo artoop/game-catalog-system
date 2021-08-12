@@ -5,7 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import pds.gcs.entity.Game;
+import pds.gcs.repository.CommentRepository;
 import pds.gcs.repository.GameRepository;
 
 @SpringBootApplication
@@ -17,11 +17,12 @@ public class GameCatalogSystemApplication implements CommandLineRunner {
 	
 	@Autowired
 	private GameRepository gameRepository;
+	@Autowired
+	private CommentRepository commentRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
 		
 		
 	}
-
 }
