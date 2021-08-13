@@ -47,5 +47,11 @@ public abstract class Resource {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	public List<Comment> getComments() {
+		return this.comments;
+	}
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
 	
 }
