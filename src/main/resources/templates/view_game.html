@@ -31,20 +31,27 @@
 	<br>	
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+			<div class="col-lg-6 col-md-6 col-sm-6 container card">
 				<h1 class="text-center" th:text="${game.title}"></h1>
 				<div class="card-body">
-					<div class="form-group">
-						<h2> Title </h2>
-						<p th:text="${game.title}"></p>
-						<h2> Publisher </h2>
-						<p th:text="${game.publisher}"></p>
-						<h2> Launch Date </h2>
-						<p th:text="${game.launchDate}"></p>
-					</div>
-					
+					<div class="row">	
+						<div class="col-sm-8">
+							<div class="form-group">
+								<h2> Title </h2>
+								<p th:text="${game.title}"></p>
+								<h2> Publisher </h2>
+								<p th:text="${game.publisher}"></p>
+								<h2> Launch Date </h2>
+								<p th:text="${game.launchDate}"></p>
+							</div>
+						</div>
+						<div class="col-sm-4">	
+							<img th:src="${game.image}" class="img-thumbnail" alt="cover">
+						</div>	
+					</div>	
 				</div>
 			</div>
+			
 		</div>
 		<br>
 		<div class="row">
@@ -59,7 +66,7 @@
 					<div class="card">
 						<div class="card-body">
 							<form th:action="@{/games/{id}(id=${game.id})}" th:object="${new_comment}" method="POST">
-								<input type="text" th:field="*{id}"/>
+								<input type="hidden" th:field="*{id}"/>
 								<div class="form-group">
 									<label> Enter Comment </label>
 									<input

@@ -7,14 +7,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "games")
 public class Game extends Resource{
-	/*
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@Column(name = "title", nullable = false)
-	private String title;
-	*/
+
 	@Column(name = "publisher")
 	private String publisher;
 	
@@ -25,11 +18,12 @@ public class Game extends Resource{
 		
 	}
 	
-	public Game(String title, String publisher, String launchDate) {
+	public Game(String title, String publisher, String launchDate, String image) {
 		super();
 		this.title = title;
 		this.publisher = publisher;
 		this.launchDate = launchDate;
+		this.image = image;
 	}
 	public Long getId() {
 		return id;

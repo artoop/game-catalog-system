@@ -22,6 +22,9 @@ public abstract class Resource {
 	
 	@Column(name = "title", nullable = false)
 	protected String title;
+	
+	@Column(name = "image")
+	protected String image;
 
 	@OneToMany(mappedBy = "resource", cascade = CascadeType.ALL, orphanRemoval = true)
 	protected List<Comment> comments;
@@ -31,9 +34,10 @@ public abstract class Resource {
 		
 	}
 	
-	public Resource(String title) {
+	public Resource(String title, String image) {
 		super();
 		this.title = title;
+		this.image = image;
 	}
 	public Long getId() {
 		return id;
@@ -52,6 +56,14 @@ public abstract class Resource {
 	}
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+	
+	public String getImage() {
+		return image;
+	}
+	
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 }
