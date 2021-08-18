@@ -69,13 +69,6 @@ public class GameController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
 	//comment posting handler
 	@PostMapping("/games/{id}")
 	public String postComment(@PathVariable Long id, @ModelAttribute("comment") Comment comment) {

@@ -20,8 +20,6 @@ public class GameServiceImpl implements GameService {
 		this.gameRepository = gameRepository;
 	}
 
-
-
 	@Override
 	public List<Game> getAllGames() {
 		return gameRepository.findAll();
@@ -29,6 +27,7 @@ public class GameServiceImpl implements GameService {
 	
 	@Override
 	public Game saveGame(Game game) {
+		game.defineNotificationDate();
 		return gameRepository.save(game);
 	}
 	

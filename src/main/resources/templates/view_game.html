@@ -52,7 +52,12 @@
 							<img th:src="${game.image}" class="img-thumbnail" alt="cover">
 						</div>	
 					</div>	
+					<div class="col-md-12 text-center">
+						<a th:href="@{/games/like/{id}(id=${game.id})}" 
+							class="btn btn-primary"> Like </a>
+					</div>
 				</div>
+
 			</div>
 			
 		</div>

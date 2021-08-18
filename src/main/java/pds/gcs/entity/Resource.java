@@ -1,5 +1,6 @@
 package pds.gcs.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
@@ -29,6 +34,10 @@ public abstract class Resource {
 	@OneToMany(mappedBy = "resource", cascade = CascadeType.ALL, orphanRemoval = true)
 	protected List<Comment> comments;
 	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Column(name = "notification_date")
+	protected Date notificationDate;
 		
 	public Resource() {
 		
@@ -39,6 +48,10 @@ public abstract class Resource {
 		this.title = title;
 		this.image = image;
 	}
+	
+	public void defineNotificationDate() {
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -64,6 +77,14 @@ public abstract class Resource {
 	
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public Date getNotificationDate() {
+		return notificationDate;
+	}
+
+	public void setNotificationDate(Date notificationDate) {
+		this.notificationDate = notificationDate;
 	}
 	
 }
