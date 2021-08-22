@@ -1,5 +1,8 @@
 package pds.gcs.controller;
 
+import java.util.List;
+
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,8 +10,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import pds.gcs.authentication.CustomUserDetails;
 import pds.gcs.entity.Comment;
 import pds.gcs.entity.Game;
+import pds.gcs.entity.Resource;
 import pds.gcs.service.CommentService;
 import pds.gcs.service.GameService;
 
@@ -24,7 +29,7 @@ public class GameController {
 		this.commentService = commentService;
 	}
 	
-	//handler method for the games list and return mode and view
+	//handler method for the games
 	@GetMapping("/games")
 	public String listGames(Model model) {
 		model.addAttribute("games", gameService.getAllGames());
@@ -82,7 +87,19 @@ public class GameController {
 		
 	//show game page handler
 	@GetMapping("/games/{id}")
-	public String showGameInfo(@PathVariable Long id, Model model) {
+	public String showGameInfo(@AuthenticationPrincipal CustomUserDetails userDetails, 
+			@PathVariable Long id, Model model) {
+		
+		Long userId = userDetails.getUserId();
+		List<Resource> favorites = gameService.findFavoritesByUserId(userId);
+		boolean liked = false;
+		
+		for(int i=0; i<favorites.size(); i++) {
+			if(id == favorites.get(i).getId())
+				liked = true;
+		}
+		
+		model.addAttribute("liked", liked);
 		model.addAttribute("game", gameService.getGameById(id));
 		model.addAttribute("comments", commentService.findByResourceId(id));		
 		model.addAttribute("new_comment", new Comment());

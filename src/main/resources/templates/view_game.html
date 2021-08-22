@@ -53,8 +53,12 @@
 						</div>	
 					</div>	
 					<div class="col-md-12 text-center">
-						<a th:href="@{/games/like/{id}(id=${game.id})}" 
-							class="btn btn-primary"> Like </a>
+						<div th:switch="${liked}">
+						  <a th:case="${true}" th:href="@{/favorites/dislike/{id}(id=${game.id})}" 
+							class="btn btn-primary" > Dislike </a>
+						  <a th:case="${false}" th:href="@{/favorites/like/{id}(id=${game.id})}" 
+							class="btn btn-primary" > Like </a>
+						</div>				
 					</div>
 				</div>
 

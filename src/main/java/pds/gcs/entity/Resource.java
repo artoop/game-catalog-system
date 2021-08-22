@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -38,7 +39,10 @@ public abstract class Resource {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "notification_date")
 	protected Date notificationDate;
-		
+	
+	@ManyToMany(mappedBy = "favorites")
+	private List<User> users;
+	
 	public Resource() {
 		
 	}

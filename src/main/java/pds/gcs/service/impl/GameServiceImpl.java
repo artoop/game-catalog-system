@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import pds.gcs.entity.Game;
+import pds.gcs.entity.Resource;
 import pds.gcs.repository.GameRepository;
 import pds.gcs.service.GameService;
 
@@ -23,6 +24,11 @@ public class GameServiceImpl implements GameService {
 	@Override
 	public List<Game> getAllGames() {
 		return gameRepository.findAll();
+	}
+	
+	@Override
+	public List<Resource> findFavoritesByUserId(Long id) {
+		return gameRepository.findByUsers_Id(id);
 	}
 	
 	@Override

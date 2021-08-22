@@ -10,4 +10,6 @@ import pds.gcs.entity.Resource;
 
 public interface GameRepository extends JpaRepository<Game, Long> {
 	
+	public List<Resource> findByUsers_Id(Long id);
+	
 }
