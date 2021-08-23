@@ -1,6 +1,6 @@
 package pds.gcs.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,23 +17,19 @@ public class Game extends Resource{
 	@Column(name = "publisher")
 	private String publisher;
 	
-	@Column(name = "lauch_date")
-	private String launchDate;
-	
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "launch")
-	private Date launch;
+	private LocalDate launch;
 	
 	public Game() {
 		
 	}
 	
-	public Game(String title, String publisher, String launchDate, String image) {
+	public Game(String title, String publisher, LocalDate launch, String image) {
 		super();
 		this.title = title;
 		this.publisher = publisher;
-		this.launchDate = launchDate;
+		this.launch = launch;
 		this.image = image;
 	}
 	
@@ -60,18 +56,13 @@ public class Game extends Resource{
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
-	public String getLaunchDate() {
-		return launchDate;
-	}
-	public void setLaunchDate(String launchDate) {
-		this.launchDate = launchDate;
-	}
 
-	public Date getLaunch() {
+
+	public LocalDate getLaunch() {
 		return launch;
 	}
 
-	public void setLaunch(Date launch) {
+	public void setLaunch(LocalDate launch) {
 		this.launch = launch;
 	}
 	

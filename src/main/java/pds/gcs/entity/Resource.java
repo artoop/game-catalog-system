@@ -1,5 +1,6 @@
 package pds.gcs.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -35,13 +36,15 @@ public abstract class Resource {
 	@OneToMany(mappedBy = "resource", cascade = CascadeType.ALL, orphanRemoval = true)
 	protected List<Comment> comments;
 	
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "notification_date")
-	protected Date notificationDate;
+	protected LocalDate notificationDate;
 	
 	@ManyToMany(mappedBy = "favorites")
 	private List<User> users;
+	
+	@ManyToMany(mappedBy = "resourcesToNotify")
+	private List<User> usersToNotify;
 	
 	public Resource() {
 		
@@ -83,11 +86,11 @@ public abstract class Resource {
 		this.image = image;
 	}
 
-	public Date getNotificationDate() {
+	public LocalDate getNotificationDate() {
 		return notificationDate;
 	}
 
-	public void setNotificationDate(Date notificationDate) {
+	public void setNotificationDate(LocalDate notificationDate) {
 		this.notificationDate = notificationDate;
 	}
 	

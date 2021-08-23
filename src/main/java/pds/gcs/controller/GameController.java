@@ -64,9 +64,8 @@ public class GameController {
 			Game existingGame = gameService.getGameById(game.getId());
 			existingGame.setTitle(game.getTitle());
 			existingGame.setPublisher(game.getPublisher());
-			existingGame.setLaunchDate(game.getLaunchDate());
 			existingGame.setImage(game.getImage());
-			
+			existingGame.setLaunch(game.getLaunch());
 			//save updated game object
 			gameService.updateGame(existingGame);
 		}

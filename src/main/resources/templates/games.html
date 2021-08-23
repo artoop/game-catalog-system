@@ -56,7 +56,7 @@
 				<tr th:each="game: ${games}">
 					<td><a th:href="@{/games/{id}(id=${game.id})}" th:text="${game.title}" ></a></td>
 					<td th:text="${game.publisher}"></td>
-					<td th:text="${game.launchDate}"></td>
+					<td th:text="${game.launch}"></td>
 					<td>
 						<a th:href="@{/games/edit/{id}(id=${game.id})}" 
 						class="btn btn-primary"> Update </a>

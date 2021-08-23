@@ -44,6 +44,7 @@ public class GameServiceImpl implements GameService {
 	
 	@Override
 	public Game updateGame(Game game) {
+		game.defineNotificationDate();
 		return gameRepository.save(game);
 	}
 	

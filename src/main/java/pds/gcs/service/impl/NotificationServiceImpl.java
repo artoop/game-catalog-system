@@ -1,16 +1,19 @@
 package pds.gcs.service.impl;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import pds.gcs.entity.Game;
 import pds.gcs.entity.Resource;
 import pds.gcs.entity.User;
 import pds.gcs.repository.ResourceRepository;
 import pds.gcs.repository.UserRepository;
+import pds.gcs.service.EmailService;
 import pds.gcs.service.NotificationService;
 
 @Service
@@ -18,35 +21,47 @@ public class NotificationServiceImpl implements NotificationService {
 	
 	ResourceRepository resourceRepository;
 	UserRepository userRepository;
+	EmailNotifier emailNotifier;
 	
 	
 	private static Logger logger = LoggerFactory.getLogger(NotificationServiceImpl.class);
 	
-	public NotificationServiceImpl (ResourceRepository resourceRepository) {
+	public NotificationServiceImpl (ResourceRepository resourceRepository, UserRepository userRepository, EmailNotifier emailNotifier) {
 		super();
 		this.resourceRepository = resourceRepository;
+		this.userRepository = userRepository;
+		this.emailNotifier = emailNotifier;
 	}
+
+	@Transactional
 	public void fetchDailyNotifications() {
-		List<Resource> resources = resourceRepository.findByNotificationDate(new Date());
-		Resource r;
-		List<User> users;
-		/*for (int i=0; i<resources.size(); i++) {
-			r = resources.get(i);
-			//ACHA USUARIOS QUE TEM ESSE RECURSO (jOGO) r NA LISTA DE FAVORITOS
+		//clear previous day notifications
+		userRepository.clearNotifications();
+		
+		//update notifications table (user_id and resource_id)
+		userRepository.updateNotifications(LocalDate.now());
+		
+		//get list of users to be notified
+		List<User> users = userRepository.getUsersToNotify();
+		
+		List<Game> resources;
+		
+		
+		//get games to be notified about
+		for(int i=0; i<users.size(); i++) {
+			Long id = users.get(i).getId();
+			resources = resourceRepository.getResourcesToNotifyAbout(id);
 			
-			for (int j=0; j<users.size(); j++) {
-				notify(users.get(j), r);
-			}
+			User user = users.get(i);
+			
+			emailNotifier.notify(user, resources);
 			
 			
-			
-			//List<Resource> r = resourceRepository.findByTitle("Rayman");
 		}
-		if (resources.size() == 0)
-			logger.info("Lista vazia");
-		else
-			logger.info("Tem coisaa");*/
+		
 	}
+	
+
 	
 	public void notify (User user, Resource resource) {
 		//mandar email pro 

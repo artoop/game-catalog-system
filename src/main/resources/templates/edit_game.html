@@ -5,6 +5,7 @@
 <title>Game Catalog System</title>
 <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.css}"/>
 <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}"/>
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" 
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
@@ -63,31 +64,16 @@
 						</div>
 						<div class="form-group">
 							<label> Launch Date </label>
-							<input
-							type="text"
-							name="launchDate" 
-							th:field="*{launchDate}"
-							class="form-control"
-							placeholder="Enter game launch date"
-							/>
-						</div>
-						
-						<div class="form-group">
-							<div class="input-group date">
-									<label> Launch Date </label>
-									<input
-									type="text"
-									name="launch" 
-									th:field="*{launch}"
-									class="form-control"
-									placeholder="Enter game launch date"
-									/>
-									<div class="input-group-append">
-										<span class="input-group-text">
-											<i class="far fa-calendar-out"></i>
-										</span>
-									</div>
-							</div>	
+							<div>
+								<input
+								type="date"
+								name="launch" 
+								th:field="*{launch}"
+								class="form-control"
+								placeholder="Enter game launch date (dd/mm/yyyy)"
+								/>
+							</div>
+								
 						</div>
 						
 						<div class="form-group">

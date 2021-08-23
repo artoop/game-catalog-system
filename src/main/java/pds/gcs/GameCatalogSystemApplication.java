@@ -27,7 +27,7 @@ public class GameCatalogSystemApplication implements CommandLineRunner {
 	
 	@Scheduled(initialDelay = 1000, fixedRate = 10000)
 	public void executeDailyNotifications() {
-		//notificationService.fetchDailyNotifications();
+		notificationService.fetchDailyNotifications();
 	}
 	
 	@Override

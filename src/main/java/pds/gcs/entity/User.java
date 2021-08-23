@@ -55,6 +55,12 @@ public class User {
 		{@JoinColumn(name = "resource_id")})
 	private List<Resource> favorites = new ArrayList<Resource>();
 	
+	@ManyToMany
+	@JoinTable(name = "notifications", joinColumns = 
+	{@JoinColumn(name = "user_id")}, inverseJoinColumns = 
+		{@JoinColumn(name = "resource_id")})
+	private List<Resource> resourcesToNotify = new ArrayList<Resource>();
+	
 	public void addFavorite(Resource resource) {
 		favorites.add(resource);
 	}
